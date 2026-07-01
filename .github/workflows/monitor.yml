@@ -9,6 +9,13 @@ on:
 permissions:
   contents: write   # needed so the workflow can commit updated seen_state.json
 
+# Only one run at a time. If a run is already in progress when the next
+# scheduled tick (or a manual trigger) fires, the new one waits in queue
+# instead of running concurrently and racing the first one's git push.
+concurrency:
+  group: ea-results-monitor
+  cancel-in-progress: false
+
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -37,6 +44,9 @@ jobs:
             git config user.email "actions@github.com"
             git add seen_state.json
             git commit -m "Update seen announcements state [skip ci]"
+            # Pull-rebase before pushing in case something else updated the
+            # branch since checkout (belt-and-braces alongside concurrency: above)
+            git pull --rebase origin main
             git push
           else
             echo "No state changes to commit."
