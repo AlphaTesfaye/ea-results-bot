@@ -14,9 +14,9 @@ import time
 import requests
 
 TELEGRAM_API = "https://api.telegram.org"
-REQUEST_TIMEOUT = 60
-MAX_RETRIES = 3
-RETRY_BACKOFF_SECONDS = 10
+REQUEST_TIMEOUT = 20
+MAX_RETRIES = 2
+RETRY_BACKOFF_SECONDS = 8
 
 
 def send_message(text: str, parse_mode: str = "HTML") -> None:

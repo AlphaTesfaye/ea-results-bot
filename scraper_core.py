@@ -18,9 +18,9 @@ URL = "https://corporate.ethiopianairlines.com/AboutEthiopian/careers/results"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; ResultsMonitor/1.0; personal use)"
 }
-REQUEST_TIMEOUT = 60
-MAX_RETRIES = 3
-RETRY_BACKOFF_SECONDS = 10
+REQUEST_TIMEOUT = 20
+MAX_RETRIES = 2
+RETRY_BACKOFF_SECONDS = 8
 
 
 @dataclass
